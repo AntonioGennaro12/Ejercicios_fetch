@@ -15,7 +15,7 @@ p {
 
 .my-cards-cont {
     background: linear-gradient(#376b9864, #237c82);
-    max-height: 100vh;
+    max-height: 200vh;
     flex: 1; 
     display: flex;
     flex-wrap: wrap;
