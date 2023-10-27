@@ -1,0 +1,44 @@
+body {
+    display: flex;
+}
+.my-char-cont {
+    background: linear-gradient(#afdee764, #6c86b5);
+    border: solid 2px darkgreen;
+    width: 270px;    
+}
+
+p {
+    font-size: 10px;
+    margin-top: 0px;
+    margin-bottom: 1px;
+}
+
+.my-cards-cont {
+    background: linear-gradient(#376b9864, #237c82);
+    max-height: 100vh;
+    flex: 1; 
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
+.cards {
+    border: solid 1px darkgreen !important;
+    background-color: lightcyan !important;
+} 
+
+.card-title {
+    width: 100px;
+    padding-top: 0;
+    margin: 0;
+    font-size: 10px;
+    color: darkgreen;
+}
+.card-img-top {
+    width: 100px;
+    height: 125px;
+}
+
+.detail-card-img {
+    width: 270px;
+    height: 330px;
+}

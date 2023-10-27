@@ -1,16 +1,13 @@
-const API_4 = "https://randomuser.me/api/?results=5000";
+const miBody = document.querySelector("body");
+const API_4 = "https://randomuser.me/api/?results=21";
 
 async function generarTarjeta(randomuser) {
-    let infoRandomuser = await fetch(randomuser.url);
-    infoRandomuser = await infoPokemon.json();
-    infoHabilidad = await fetch(infoRandomuser.abilities[0].ability.url);
-    infoHabilidad = await infoHabilidad.json();
-    document.querySelector("body").innerHTML += `
-        <div class="card" style="width: 18rem;">
-            <img src="${randomuser.image}" class="card-img-top" alt="...">
+    miBody.innerHTML += `
+        <div class="card" style="width: 12rem;">
+            <img src="${randomuser.picture.medium}" class="card-img-top" alt="...">
             <div class="card-body">
-            <h5 class="card-title">${randomuser.name}</h5>
-            <p class="card-text">${randomuser.species}</p>
+            <h5 class="card-title">Nombre: ${randomuser.name.first}</h5>
+            <p class="card-text">Ciudad: ${randomuser.location.city}</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
@@ -18,9 +15,12 @@ async function generarTarjeta(randomuser) {
 }
 
 async function obtenerInfoApi(api) {
+    miBody.innerHTML = "";
     const resultado = await fetch(api);
     const info = await resultado.json();
     info.results.forEach(generarTarjeta);
 }
 
-obtenerInfoApi(API_4);
+setInterval(() => { obtenerInfoApi(API_4);}, 3000);
+
+//obtenerInfoApi(API_4);
