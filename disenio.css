@@ -1,6 +1,44 @@
 body {
-    display: flex;
+    display: grid;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: midnightblue;
 }
+
+.chart-container {
+    position: relative;
+    width: 90%;
+    margin: auto;
+}
+
+.selector {
+    position: relative;
+    width: 300px;
+    margin: auto;
+    background: linear-gradient(#afdee764, #6c86b5);
+    border: solid 2px darkgreen;
+       
+}
+#series, #symbols {
+    position: relative;
+    width: 295px;
+    margin: auto;
+    font-weight: 400;
+    background-color: rgb(209, 235, 232);
+}
+.labels {
+    font-weight: bold;
+}
+#fetchData {
+    position: relative;
+    width: 295px;
+    margin: auto;
+    font-weight: bolder;
+    background-color: rgb(0, 255, 187);
+    
+}
+
+/* Crads */
 .my-char-cont {
     background: linear-gradient(#afdee764, #6c86b5);
     border: solid 2px darkgreen;
@@ -8,14 +46,14 @@ body {
 }
 
 p {
-    font-size: 10px;
+    font-size: 10px; /* Ajusta el tamaño de la fuente según sea necesario */
     margin-top: 0px;
     margin-bottom: 1px;
 }
 
 .my-cards-cont {
     background: linear-gradient(#376b9864, #237c82);
-    max-height: 200vh;
+    max-height: 160vh;
     flex: 1; 
     display: flex;
     flex-wrap: wrap;
@@ -27,12 +65,17 @@ p {
 } 
 
 .card-title {
-    width: 100px;
-    padding-top: 0;
-    margin: 0;
-    font-size: 10px;
+    width: 100px;       /*  */
+    padding-top: 0;     /*  */
+    margin: 0;          /*  */
+    font-size: 14px;    /* Tamaño de fuente para el título */
     color: darkgreen;
 }
+
+.card-text {
+    font-size: 12px; /* Tamaño de fuente para el texto */
+}
+
 .card-img-top {
     width: 100px;
     height: 125px;
@@ -42,3 +85,4 @@ p {
     width: 270px;
     height: 330px;
 }
+

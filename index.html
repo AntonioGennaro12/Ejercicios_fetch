@@ -7,37 +7,64 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="disenio.css">
-    </head>
+</head>
 
-<body style="display: flex; flex-wrap: wrap">
+<body>
+
+    <div class="chart-container">
+        <canvas id="stockChart"></canvas>
+    </div>
+    <div class="selector">
+        <label for="series" class="labels">Elejir Serie de Datos:</label>
+        <select id="series">
+            <option value=0>Reciente</option>
+            <option value=1>Histórico</option>
+        </select> 
+        <label for="symbols" class="labels">Elegir Empresas:</label>
+        <select id="symbols" multiple size="12">
+            <option value="AGRO">AGRO - Adecoagro S.A.</option>
+            <option value="BMA">BMA - Banco Macro S.A.</option>
+            <option value="CEPU">CEPU - Central Puerto S.A.</option>
+            <option value="CRESY">CRESY - Cresud S.A.C.I.F. y A.</option>
+            <option value="DESP">DESP - Despegar.com, Corp.</option>
+            <option value="EDN">EDN - Edenor S.A.</option>
+            <option value="GLOB">GLOB - Globant S.A.</option>
+            <option value="IRS">IRS - Irsa Inv. y Rep. S.A.</option>
+            <option value="MELI">MELI - MercadoLibre, Inc.</option>
+            <option value="PAM">PAM - Pampa Energía S.A.</option>
+            <option value="SUPV">SUPV - Gr. Supervielle S.A.</option>
+            <option value="TEO">TEO - Telecom Argentina S.A.</option>
+            <option value="TGS">TGS - Transportadora de Gas del Sur S.A.</option>
+            <option value="TX">TX - Ternium S.A.</option>
+            <option value="YPF">YPF - YPF S.A.</option>
+            <option value="AMD">AMD - Advanced Micro Devices, Inc.</option>
+            <option value="ADBE">ADBE - Adobe Inc.</option>
+            <option value="AMZN">AMZN - Amazon.com Inc.</option>
+            <option value="AAPL">AAPL - Apple Inc.</option>
+            <option value="CRM">CRM - Salesforce, Inc.</option>
+            <option value="CSCO">CSCO - Cisco Systems, Inc.</option>
+            <option value="GOOGL">GOOGL - Alphabet Inc. (Google).</option>
+            <option value="IBM">IBM - IBM Corporation (IBM)</option>
+            <option value="INTC">INTC - Intel Corporation</option>
+            <option value="META">META - Meta Platforms, Inc. (Facebook)</option>
+            <option value="MSFT">MSFT - Microsoft Corporation</option>
+            <option value="NFLX">NFLX - Netflix, Inc.</option>
+            <option value="NVDA">NVDA - NVIDIA Corporation</option>
+            <option value="ORCL">ORCL - Oracle Corporation</option>
+            <option value="PYPL">PYPL - PayPal Holdings, Inc.</option>
+            <option value="TSLA">TSLA - Tesla, Inc.</option>
+        </select>
+        <button id="fetchData" class="labels">Fetch Data</button>
+    </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+      
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-
-        <script>
-            const availableScripts = {
-                poke20:   'app1.js',
-                poketodo: 'app1a.js',
-                hpchars:  'app2.js',
-                hpdetall: 'app2a.js',
-                hpspell:  'app2b.js',
-                productos:'app3.js',
-                randuser: 'app4.js',
-            };
-    
-            const selectedScript = prompt('Elija uno: poke20, poketodo, hpchars, hpdetall, hpspell, productos o randuser');
-    
-            if (selectedScript && availableScripts[selectedScript]) {
-                const scriptElement = document.createElement('script');
-                scriptElement.src = availableScripts[selectedScript];
-                document.body.appendChild(scriptElement);
-            } else {
-                alert('opción no válida o no seleccionado.');
-            }
-        </script>
-    <!--  <script src="app2a.js"></script> -->
+    <script src="app6.js"></script>
 </body>
-
 </html>
