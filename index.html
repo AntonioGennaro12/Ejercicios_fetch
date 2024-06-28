@@ -19,8 +19,9 @@
     <div class="selector">
         <label for="series" class="labels">Elejir Serie de Datos:</label>
         <select id="series">
-            <option value=0>Reciente</option>
-            <option value=1>Histórico</option>
+            <option value=0>Recientes</option>
+            <option value=1>Últimos 2 años</option>
+            <option value=2>Últimos 10 años</option>
         </select> 
         <label for="symbols" class="labels">Elegir Empresas:</label>
         <select id="symbols" multiple size="12">
@@ -56,7 +57,7 @@
             <option value="PYPL">PYPL - PayPal Holdings, Inc.</option>
             <option value="TSLA">TSLA - Tesla, Inc.</option>
         </select>
-        <button id="fetchData" class="labels">Fetch Data</button>
+        <button id="fetchData" class="labels">Graficar Datos</button>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

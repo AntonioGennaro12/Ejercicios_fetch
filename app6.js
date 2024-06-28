@@ -1,11 +1,14 @@
 const apiKey = 'WCH8EC3ECIOS0HP5'; // Reemplaza con tu clave API de Alpha Vantage
-const timeSeries = ['TIME_SERIES_DAILY', 'TIME_SERIES_MONTHLY'];
+const timeSeries = ['TIME_SERIES_DAILY', 'TIME_SERIES_WEEKLY', 'TIME_SERIES_MONTHLY'];
 let functionType = timeSeries[0]; // default value
 let stockData = {};
 
 // Función para normalizar los datos
 function normalize(data) {
-    const initial = data[0];
+    // Encuentra el primer valor no nulo
+    const firstNonNullIndex = data.findIndex(value => value !== null && value !== 0);
+    const initial = data[firstNonNullIndex];
+    // Normaliza los datos basados en el primer valor no nulo
     return data.map(value => (value / initial) * 100);
 }
 
@@ -16,6 +19,8 @@ async function fetchStockData(symbol) {
     const data = await response.json();
     if (functionType === 'TIME_SERIES_DAILY' && data['Time Series (Daily)']) {
         return data['Time Series (Daily)'];
+    } else if (functionType === 'TIME_SERIES_WEEKLY' && data['Weekly Time Series']) {
+        return data['Weekly Time Series'];
     } else if (functionType === 'TIME_SERIES_MONTHLY' && data['Monthly Time Series']) {
         return data['Monthly Time Series'];
     } else {
@@ -27,34 +32,34 @@ async function fetchStockData(symbol) {
 async function main() {
     const seriesSelect = document.getElementById('series');
     functionType = timeSeries[seriesSelect.value];
-        console.log(functionType);
-    // Obtener los símbolos seleccionados
+    console.log(functionType);
     const symbolSelect = document.getElementById('symbols');
-    //const selectedSymbols = Array.from(symbolSelect.selectedOptions).map(option => option.value);
     const selectedOptions = Array.from(symbolSelect.selectedOptions);
-    // Comprobaciones de consola para verificar la selección múltiple
         console.log('selectedOptions:', selectedOptions);
     const selectedSymbols = selectedOptions.map(option => option.value);
         console.log('selectedSymbols:', selectedSymbols);
         console.log('selectedSymbols.length:', selectedSymbols.length);
-    
     const dateLabels = [];
     const datasets = [];
+    const maxPoints = 120; // Número máximo de puntos a mostrar
 
   if(1){
     for (let i = 0; i < selectedSymbols.length; i++) {
         const symbol = selectedSymbols[i];
         const timeSeries = await fetchStockData(symbol);
-
         if (timeSeries) {
             const dates = Object.keys(timeSeries).reverse();
-            const closingPrices = dates.map(date => parseFloat(timeSeries[date]['4. close']));
-
+            const closingPrices = dates.map(date => parseFloat(timeSeries[date]['4. close'])); 
+            // Limitar el número de puntos a los últimos maxPoints
+            const limitedDates = dates.slice(-maxPoints);
+            const limitedClosingPrices = closingPrices.slice(-maxPoints);
+                        
             if (i === 0) {
-                dateLabels.push(...dates);
+                dateLabels.push(...limitedDates);
             }
-
-            const normalizedData = normalize(closingPrices);
+            // Si hay menos de maxPoints, rellenar con nulls al principio
+            const filledClosingPrices = Array(maxPoints - limitedClosingPrices.length).fill(null).concat(limitedClosingPrices);
+            const normalizedData = normalize(filledClosingPrices);
             datasets.push({
                 label: symbol,
                 data: normalizedData,
@@ -63,7 +68,7 @@ async function main() {
             });
         }
     }
-
+    
     // Configurar y crear el gráfico
     const ctx = document.getElementById('stockChart').getContext('2d');
     new Chart(ctx, {
@@ -82,7 +87,7 @@ async function main() {
                 x: {
                     type: 'time',
                     time: {
-                        unit: functionType === 'TIME_SERIES_DAILY' ? 'day' : 'month'
+                        unit: functionType === 'TIME_SERIES_DAILY' ? 'day' : functionType === 'TIME_SERIES_WEEKLY' ? 'week' : 'month'
                     }
                 }
             }
